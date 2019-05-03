@@ -79,6 +79,32 @@ namespace Conectividade
             return true;
         }
 
+        public bool ehConexoGoodman()
+        {
+            int c = 0;
+            Grafo g = new Grafo(qtdV);
+            int vZero = 0;
+            g.listasAdjacencias = this.listasAdjacencias;
+
+            while(g.listasAdjacencias.Count != 0)
+            {
+                int a = g.listasAdjacencias.First().Key;
+                for (int i = 0; i < qtdV; i++)
+                {
+                    if (g.listasAdjacencias[i].Contains(a))
+                    {
+                        //fazer a fusão aqui dentro
+                    }
+                    // remova v0, isto é, faça H = H - v0; c = c+1;
+
+
+                }
+
+            }
+
+            return true;
+        }
+
 
 
 

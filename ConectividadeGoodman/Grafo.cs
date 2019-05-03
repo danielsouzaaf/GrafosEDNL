@@ -37,6 +37,47 @@ namespace ConectividadeGoodman
             listasAdjacencias[vo].Add(vd);
         }
 
+        public void BuscaEmProfundidade(int v, bool[] visitados)
+        {
+            visitados[v] = true;
+
+            for (int i = 0; i < listasAdjacencias[v].Count; i++)
+                if (!visitados[v])
+                    BuscaEmProfundidade(i, visitados);
+        }
+
+        public bool ehConexo()
+        {
+            bool[] visitados = new bool[qtdV];
+            bool[] visitadosTransposta = new bool[qtdV];
+
+            BuscaEmProfundidade(0, visitados);
+
+            // se não tiver visitado todos os vértices, não é conexo.
+            for (int i = 0; i < qtdV; i++)
+                if (visitados[i] == false)
+                    return false;
+
+            //transposta do grafo pra visitar de novo
+
+            Grafo g = this.GetTransposta();
+
+            g.BuscaEmProfundidade(0, visitadosTransposta);
+
+            // se não tiver visitado todos os vértices na transposta, não é conexo.
+
+            for (int i = 0; i < qtdV; i++)
+                if (visitadosTransposta[i] == false)
+                    return false;
+
+            return true;
+
+
+
+        }
+
+
+
 
 
     }

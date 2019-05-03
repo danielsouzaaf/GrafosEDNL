@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace ConectividadeGoodman
+namespace Conectividade
 {
     class Grafo
     {
         public int qtdV; //quantidade de vértices
-        public List<List<int>> listasAdjacencias;
+        public Dictionary<int, LinkedList<int>> listasAdjacencias;
 
         public Grafo(int qtdV)
         {
             this.qtdV = qtdV;
-            var a = new List<int>();
-            this.listasAdjacencias = new List<List<int>>();
+            this.listasAdjacencias = new Dictionary<int, LinkedList<int>>(qtdV);
+
+            for (int i = 0; i < qtdV; i++)
+                listasAdjacencias[i] = new LinkedList<int>();
         }
 
         public Grafo GetTransposta()
@@ -25,7 +27,7 @@ namespace ConectividadeGoodman
             {
                 for (int i = 0; i < listasAdjacencias[v].Count; i++)
                 {
-                    g.listasAdjacencias[i].Add(v);
+                    g.listasAdjacencias[i].AddLast(v);
                 }
             }
 
@@ -34,16 +36,20 @@ namespace ConectividadeGoodman
 
         public void AdicionarAresta(int vo, int vd)
         {
-            listasAdjacencias[vo].Add(vd);
+            listasAdjacencias[vo].AddLast(vd);
         }
 
         public void BuscaEmProfundidade(int v, bool[] visitados)
         {
             visitados[v] = true;
+            LinkedList<int> lista = listasAdjacencias[v];
 
-            for (int i = 0; i < listasAdjacencias[v].Count; i++)
-                if (!visitados[v])
-                    BuscaEmProfundidade(i, visitados);
+            foreach (var adj in lista)
+            {
+                if (!visitados[adj])
+                    BuscaEmProfundidade(adj, visitados);
+            }
+            
         }
 
         public bool ehConexo()
@@ -71,9 +77,6 @@ namespace ConectividadeGoodman
                     return false;
 
             return true;
-
-
-
         }
 
 

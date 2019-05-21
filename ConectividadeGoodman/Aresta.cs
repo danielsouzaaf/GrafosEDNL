@@ -28,5 +28,10 @@ namespace Conectividade
             return vFinal;
         }
 
+        public object Element
+        {
+            get; set;
+        }
+
     }
 }

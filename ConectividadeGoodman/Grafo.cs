@@ -69,6 +69,11 @@ namespace Conectividade
             return vertices.SingleOrDefault(v => v.Element == obj);
         }
 
+        public Aresta acharAresta(object obj)
+        {
+            return arestas.SingleOrDefault(a => a.Element == obj);
+        }
+
 
 
 

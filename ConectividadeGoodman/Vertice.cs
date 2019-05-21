@@ -6,10 +6,17 @@ namespace Conectividade
 {
     public class Vertice
     {
-        private object element { get; set; }
+        private object element;
         public Vertice(object obj)
         {
             this.element = obj;
         }
+
+        public object Element
+        {
+            get; set;
+        }
+
+
     }
 }

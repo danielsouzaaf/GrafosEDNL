@@ -62,8 +62,14 @@ namespace Conectividade
                 tabela[w, v].Add(a);
 
             arestas.Add(a);
-            
         }
+
+        public Vertice acharVertice(object obj)
+        {
+            return vertices.SingleOrDefault(v => v.Element == obj);
+        }
+
+
 
 
 

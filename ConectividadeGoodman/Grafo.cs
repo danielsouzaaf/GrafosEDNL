@@ -5,108 +5,33 @@ using System.Linq;
 
 namespace Conectividade
 {
-    class Grafo
+    public class Grafo
     {
-        public int qtdV; //quantidade de vértices
-        public Dictionary<int, LinkedList<int>> listasAdjacencias;
+        List<Vertice> vertices = new List<Vertice>();
+        List<Aresta> arestas = new List<Aresta>();
+        List<Aresta>[,] tabela = new List<Aresta>[0,0];
 
-        public Grafo(int qtdV)
+        public void inserirVertice(object obj)
         {
-            this.qtdV = qtdV;
-            this.listasAdjacencias = new Dictionary<int, LinkedList<int>>(qtdV);
-
-            for (int i = 0; i < qtdV; i++)
-                listasAdjacencias[i] = new LinkedList<int>();
+            Vertice v = new Vertice(obj);
+            vertices.Add(v);
+            redimensionarTabela();
         }
 
-        public Grafo GetTransposta()
+        private void redimensionarTabela()
         {
-            Grafo g = new Grafo(qtdV);
+            List<Aresta>[,] tabelaNova = new List<Aresta>[vertices.Count, vertices.Count];
+            for (int i = 0; i < tabela.Length; i++)
+                for (int j = 0; j < tabela.Length; j++)
+                    tabelaNova[i, j] = tabela[i, j];
 
-            for (int v = 0; v < qtdV; v++)
-            {
-                for (int i = 0; i < listasAdjacencias[v].Count; i++)
-                {
-                    g.listasAdjacencias[i].AddLast(v);
-                }
-            }
-
-            return g;
+            tabela = tabelaNova;
         }
 
-        public void AdicionarAresta(int vo, int vd)
+        public int ordem()
         {
-            listasAdjacencias[vo].AddLast(vd);
+            return vertices.Count;
         }
-
-        public void BuscaEmProfundidade(int v, bool[] visitados)
-        {
-            visitados[v] = true;
-            LinkedList<int> lista = listasAdjacencias[v];
-
-            foreach (var adj in lista)
-            {
-                if (!visitados[adj])
-                    BuscaEmProfundidade(adj, visitados);
-            }
-            
-        }
-
-        public bool ehConexo()
-        {
-            bool[] visitados = new bool[qtdV];
-            bool[] visitadosTransposta = new bool[qtdV];
-
-            BuscaEmProfundidade(0, visitados);
-
-            // se não tiver visitado todos os vértices, não é conexo.
-            for (int i = 0; i < qtdV; i++)
-                if (visitados[i] == false)
-                    return false;
-
-            //transposta do grafo pra visitar de novo
-
-            Grafo g = this.GetTransposta();
-
-            g.BuscaEmProfundidade(0, visitadosTransposta);
-
-            // se não tiver visitado todos os vértices na transposta, não é conexo.
-
-            for (int i = 0; i < qtdV; i++)
-                if (visitadosTransposta[i] == false)
-                    return false;
-
-            return true;
-        }
-
-        public bool ehConexoGoodman()
-        {
-            int c = 0;
-            Grafo g = new Grafo(qtdV);
-            int vZero = 0;
-            g.listasAdjacencias = this.listasAdjacencias;
-
-            while(g.listasAdjacencias.Count != 0)
-            {
-                int a = g.listasAdjacencias.First().Key;
-                for (int i = 0; i < qtdV; i++)
-                {
-                    if (g.listasAdjacencias[i].Contains(a))
-                    {
-                        //fazer a fusão aqui dentro
-                    }
-                    // remova v0, isto é, faça H = H - v0; c = c+1;
-
-
-                }
-
-            }
-
-            return true;
-        }
-
-
-
 
 
     }

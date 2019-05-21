@@ -7,14 +7,14 @@ namespace Conectividade
     public class Aresta
     {
         private Object element;
-        private Vertice v1, v2;
+        private Vertice vInicial, vFinal;
         private Boolean direcionada;
 
-        public Aresta(Vertice v1, Vertice v2, object obj, bool direcionada)
+        public Aresta(Vertice vInicial, Vertice vFinal, object obj, bool direcionada)
         {
             this.element = obj;
-            this.v1 = v1;
-            this.v2 = v2;
+            this.vInicial = vInicial;
+            this.vFinal = vFinal;
             this.direcionada = direcionada;
         }
 

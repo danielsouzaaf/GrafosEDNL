@@ -38,6 +38,14 @@ namespace Conectividade
             return new Vertice[] { a.verticeInicial(), a.verticeFinal() };
         }
 
+        public Vertice oposto(Vertice v, Aresta a)
+        {
+            return a.verticeInicial() == v ? a.verticeFinal() : (a.verticeFinal() == v ? a.verticeInicial() : throw new Exception("Nenhum dos dois vértices é um vértice da aresta!"));
+
+        }
+
+
+
 
     }
 }

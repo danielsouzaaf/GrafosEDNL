@@ -18,5 +18,15 @@ namespace Conectividade
             this.direcionada = direcionada;
         }
 
+        public Vertice verticeInicial()
+        {
+            return vInicial;
+        }
+
+        public Vertice verticeFinal()
+        {
+            return vFinal;
+        }
+
     }
 }

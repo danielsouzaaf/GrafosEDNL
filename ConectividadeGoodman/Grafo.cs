@@ -33,6 +33,11 @@ namespace Conectividade
             return vertices.Count;
         }
 
+        public Vertice[] verticesFinais(Aresta a)
+        {
+            return new Vertice[] { a.verticeInicial(), a.verticeFinal() };
+        }
+
 
     }
 }

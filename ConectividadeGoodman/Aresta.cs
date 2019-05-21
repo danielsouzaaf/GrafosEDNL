@@ -33,5 +33,7 @@ namespace Conectividade
             get; set;
         }
 
+        public bool Direcionada { get; set; }
+
     }
 }

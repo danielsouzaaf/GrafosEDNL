@@ -110,16 +110,15 @@ namespace Conectividade
             return v.Element;
         }
 
+        public object removerAresta(Aresta a)
+        {
+            arestas.Remove(a);
+            int indiceInicial = vertices.IndexOf(a.verticeInicial()), indiceFinal = vertices.IndexOf(a.verticeFinal());
+            tabela[indiceInicial, indiceFinal].Remove(a);
+            if (!a.Direcionada)
+                tabela[indiceFinal, indiceInicial].Remove(a);
 
-
-
-
-
-
-
-
-
-
-
+            return a.Element;
+        }
     }
 }

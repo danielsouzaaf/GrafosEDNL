@@ -41,8 +41,16 @@ namespace Conectividade
         public Vertice oposto(Vertice v, Aresta a)
         {
             return a.verticeInicial() == v ? a.verticeFinal() : (a.verticeFinal() == v ? a.verticeInicial() : throw new Exception("Nenhum dos dois vértices é um vértice da aresta!"));
-
         }
+
+        public bool ehAdjacente(Vertice v, Vertice w)
+        {
+            return tabela[vertices.IndexOf(v), vertices.IndexOf(w)] != null;
+        }
+
+
+
+
 
 
 

@@ -48,6 +48,23 @@ namespace Conectividade
             return tabela[vertices.IndexOf(v), vertices.IndexOf(w)] != null;
         }
 
+        public void inserirAresta(int v, int w, object obj, bool direcionada)
+        {
+            Aresta a = new Aresta(vertices.ElementAt(v), vertices.ElementAt(w), obj, direcionada);
+            if (tabela[v, w] == null)
+            {
+                tabela[v, w] = new List<Aresta>();
+                if (!direcionada)
+                    tabela[w, v] = new List<Aresta>();
+            }
+            tabela[v, w].Add(a);
+            if (!direcionada)
+                tabela[w, v].Add(a);
+
+            arestas.Add(a);
+            
+        }
+
 
 
 

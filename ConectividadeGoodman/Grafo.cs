@@ -120,5 +120,25 @@ namespace Conectividade
 
             return a.Element;
         }
+        /*  Peguei de Israel */
+        public void mostrar()
+        {
+            Console.WriteLine("Tabela: ");
+            Console.WriteLine("   |");
+            for(int i = 0; i < vertices.Count; i++)
+                Console.Write(" v"+vertices.ElementAt(i).Element+"|");
+            Console.WriteLine();
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                Console.Write("|v"+vertices.ElementAt(i).Element);
+                for (int j = 0; j < vertices.Count; j++)
+                {
+                    if (tabela[i, j] == null)
+                        Console.Write("| 0 ");
+                    else
+                        Console.Write("| "+tabela[i,j].Count + " ");
+                }
+                Console.WriteLine("|");
+        }
     }
 }

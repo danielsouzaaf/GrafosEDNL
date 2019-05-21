@@ -74,6 +74,44 @@ namespace Conectividade
             return arestas.SingleOrDefault(a => a.Element == obj);
         }
 
+        public void substituir(Vertice v, object x)
+        {
+            v.Element = x;
+        }
+
+        public void substituir(Aresta e, object x)
+        {
+            e.Element = x;
+        }
+
+        public object removerVertice(Vertice v)
+        {
+            List<Aresta>[,] tabelaNova = new List<Aresta>[vertices.Count - 1, vertices.Count - 1];
+            int i = 0, proximoI = 0;
+            int indice = vertices.IndexOf(v);
+            while (i < vertices.Count - 1)
+            {
+                int j = 0, proximoJ = 0;
+                if (i == indice)
+                    proximoI++;
+                while (j < vertices.Count - 1)
+                {
+                    if (j == indice)
+                        proximoJ++;
+                    tabelaNova[i, j++] = tabela[proximoI, proximoJ++];
+                }
+                i++;
+                proximoI++;
+            }
+
+            tabela = tabelaNova;
+            vertices.Remove(v);
+
+            return v.Element;
+        }
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Conectividade
+namespace Grafos
 {
     class Program
     {

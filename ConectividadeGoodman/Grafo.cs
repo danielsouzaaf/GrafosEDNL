@@ -9,13 +9,18 @@ namespace Grafos
     {
         List<Vertice> vertices = new List<Vertice>();
         List<Aresta> arestas = new List<Aresta>();
-        List<Aresta>[,] tabela = new List<Aresta>[0,0];
+        List<Aresta>[,] tabela = new List<Aresta>[0, 0];
 
         public void inserirVertice(object obj)
         {
             Vertice v = new Vertice(obj);
             vertices.Add(v);
             redimensionarTabela();
+        }
+
+        public List<Vertice> getVertices()
+        {
+            return this.vertices;
         }
 
         private void redimensionarTabela()
@@ -46,6 +51,13 @@ namespace Grafos
         public bool ehAdjacente(Vertice v, Vertice w)
         {
             return tabela[vertices.IndexOf(v), vertices.IndexOf(w)] != null;
+        }
+
+        public Aresta menorAresta(Vertice v, Vertice w)
+        {
+            if (this.ehAdjacente(v, w))
+                return tabela[vertices.IndexOf(v), vertices.IndexOf(w)].OrderByDescending(a => a.Element).First();
+            throw new Exception("Não existe uma aresta entre os vértices!");
         }
 
         public void inserirAresta(int v, int w, object obj, bool direcionada)
@@ -110,6 +122,17 @@ namespace Grafos
             return v.Element;
         }
 
+        public int grau(Vertice v)
+        {
+            int g = 0;
+            int indice = vertices.IndexOf(v);
+            for (int i = 0; i < vertices.Count; i++)
+                if (tabela[indice, i] != null)
+                    g += tabela[indice, i].Count;
+
+            return g;
+        }
+
         public object removerAresta(Aresta a)
         {
             arestas.Remove(a);
@@ -125,20 +148,22 @@ namespace Grafos
         {
             Console.WriteLine("Tabela: ");
             Console.WriteLine("   |");
-            for(int i = 0; i < vertices.Count; i++)
-                Console.Write(" v"+vertices.ElementAt(i).Element+"|");
+            for (int i = 0; i < vertices.Count; i++)
+                Console.Write(" v" + vertices.ElementAt(i).Element + "|");
             Console.WriteLine();
             for (int i = 0; i < vertices.Count; i++)
             {
-                Console.Write("|v"+vertices.ElementAt(i).Element);
+                Console.Write("|v" + vertices.ElementAt(i).Element);
                 for (int j = 0; j < vertices.Count; j++)
                 {
                     if (tabela[i, j] == null)
                         Console.Write("| 0 ");
                     else
-                        Console.Write("| "+tabela[i,j].Count + " ");
+                        Console.Write("| " + tabela[i, j].Count + " ");
                 }
                 Console.WriteLine("|");
+            }
+
         }
     }
 }

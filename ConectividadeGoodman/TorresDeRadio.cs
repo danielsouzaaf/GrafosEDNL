@@ -18,6 +18,23 @@ namespace Grafos
                 verticesComGrau.Add((grafo.grau(v), v));
             }
             verticesComGrau.Sort((x, y) => y.Item1.CompareTo(x.Item1));
+            Dictionary<Vertice, string> mapaCores = new Dictionary<Vertice, string>();
+            for (int i = 0; i < verticesComGrau.Count - 1; i++)
+            {
+                if (mapaCores.ContainsKey(verticesComGrau[i].Item2))
+                    continue;
+                mapaCores.Add(verticesComGrau[i].Item2, "Cor " + i);
+                for (int j = i + 1; j < verticesComGrau.Count - 1; j++)
+                    if (!(grafo.ehAdjacente(verticesComGrau[i].Item2, verticesComGrau[j].Item2)) && !mapaCores.ContainsKey(verticesComGrau[j].Item2))
+                        mapaCores.Add(verticesComGrau[j].Item2, "Cor " + i);
+            }
+
+            foreach (KeyValuePair<Vertice, string>kvp in mapaCores)
+            {
+                Console.WriteLine($"Vértice {kvp.Key} - {kvp.Value}");
+            }
+
+
         }
 
         public TorresDeRadio()
@@ -53,18 +70,19 @@ namespace Grafos
 
             vertices = grafo.getVertices();
 
-            //Brasil e suas Fronteiras
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Uruguai), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Argentina), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Paraguai), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Bolivia), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Peru), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Colombia), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Venezuela), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Guiana), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(Suriname), 0, false);
-            grafo.inserirAresta(vertices.IndexOf(Brasil), vertices.IndexOf(GuianaFrancesa), 0, false);
 
+            //Brasil e suas Fronteiras
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Uruguai), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Argentina), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Paraguai), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Bolivia), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Peru), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Colombia), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Venezuela), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Guiana), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(Suriname), 0, false);
+            grafo.inserirAresta(grafo.AcharIndice(Brasil), grafo.AcharIndice(GuianaFrancesa), 0, false);
+/*
             //Argentina e suas Fronteiras
             grafo.inserirAresta(vertices.IndexOf(Argentina), vertices.IndexOf(Uruguai), 0, false);
             grafo.inserirAresta(vertices.IndexOf(Argentina), vertices.IndexOf(Paraguai), 0, false);
@@ -97,7 +115,7 @@ namespace Grafos
 
             //Peru e suas Fronteiras
             grafo.inserirAresta(vertices.IndexOf(Peru), vertices.IndexOf(Chile), 0, false);
-
+            */
         }
        
     }

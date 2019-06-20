@@ -46,9 +46,9 @@
                     if (!visitados[j]
                         && g.ehAdjacente(g.acharVertice(u), g.acharVertice(j))
                         && distancia[u] != int.MaxValue
-                        && distancia[u] + (int)(g.menorAresta(g.acharVertice(u), g.acharVertice(j)).Element) > distancia[j]
+                        && distancia[u] + (int)(g.menorAresta(g.acharVertice(u), g.acharVertice(j)).element) > distancia[j]
                         )
-                        distancia[j] = distancia[u] + (int)(g.menorAresta(g.acharVertice(u), g.acharVertice(j)).Element);
+                        distancia[j] = distancia[u] + (int)(g.menorAresta(g.acharVertice(u), g.acharVertice(j)).element);
                 }
             }
 

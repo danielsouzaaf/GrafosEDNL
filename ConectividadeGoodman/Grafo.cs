@@ -26,8 +26,8 @@ namespace Grafos
         private void redimensionarTabela()
         {
             List<Aresta>[,] tabelaNova = new List<Aresta>[vertices.Count, vertices.Count];
-            for (int i = 0; i < tabela.Length; i++)
-                for (int j = 0; j < tabela.Length; j++)
+            for (int i = 0; i < tabela.GetLength(0); i++)
+                for (int j = 0; j < tabela.GetLength(1); j++)
                     tabelaNova[i, j] = tabela[i, j];
 
             tabela = tabelaNova;
@@ -56,7 +56,7 @@ namespace Grafos
         public Aresta menorAresta(Vertice v, Vertice w)
         {
             if (this.ehAdjacente(v, w))
-                return tabela[vertices.IndexOf(v), vertices.IndexOf(w)].OrderByDescending(a => a.Element).First();
+                return tabela[vertices.IndexOf(v), vertices.IndexOf(w)].OrderByDescending(a => a.element).First();
             throw new Exception("Não existe uma aresta entre os vértices!");
         }
 
@@ -78,22 +78,22 @@ namespace Grafos
 
         public Vertice acharVertice(object obj)
         {
-            return vertices.SingleOrDefault(v => v.Element == obj);
+            return vertices.SingleOrDefault(v => v.element == obj);
         }
 
         public Aresta acharAresta(object obj)
         {
-            return arestas.SingleOrDefault(a => a.Element == obj);
+            return arestas.SingleOrDefault(a => a.element == obj);
         }
 
         public void substituir(Vertice v, object x)
         {
-            v.Element = x;
+            v.element = x;
         }
 
         public void substituir(Aresta e, object x)
         {
-            e.Element = x;
+            e.element = x;
         }
 
         public object removerVertice(Vertice v)
@@ -119,7 +119,7 @@ namespace Grafos
             tabela = tabelaNova;
             vertices.Remove(v);
 
-            return v.Element;
+            return v.element;
         }
 
         public int grau(Vertice v)
@@ -141,7 +141,7 @@ namespace Grafos
             if (!a.Direcionada)
                 tabela[indiceFinal, indiceInicial].Remove(a);
 
-            return a.Element;
+            return a.element;
         }
         /*  Peguei de Israel */
         public void mostrar()
@@ -149,11 +149,11 @@ namespace Grafos
             Console.WriteLine("Tabela: ");
             Console.WriteLine("   |");
             for (int i = 0; i < vertices.Count; i++)
-                Console.Write(" v" + vertices.ElementAt(i).Element + "|");
+                Console.Write(" v" + vertices.ElementAt(i).element + "|");
             Console.WriteLine();
             for (int i = 0; i < vertices.Count; i++)
             {
-                Console.Write("|v" + vertices.ElementAt(i).Element);
+                Console.Write("|v" + vertices.ElementAt(i).element);
                 for (int j = 0; j < vertices.Count; j++)
                 {
                     if (tabela[i, j] == null)
@@ -165,5 +165,11 @@ namespace Grafos
             }
 
         }
+
+        public int AcharIndice(Vertice v)
+        {
+            return vertices.FindIndex(r => r.element == v.element);
+        }
+
     }
 }

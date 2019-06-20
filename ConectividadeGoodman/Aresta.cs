@@ -6,7 +6,7 @@ namespace Grafos
 {
     public class Aresta
     {
-        private Object element;
+        public Object element;
         private Vertice vInicial, vFinal;
         private Boolean direcionada;
 
@@ -26,11 +26,6 @@ namespace Grafos
         public Vertice verticeFinal()
         {
             return vFinal;
-        }
-
-        public object Element
-        {
-            get; set;
         }
 
         public bool Direcionada { get; set; }

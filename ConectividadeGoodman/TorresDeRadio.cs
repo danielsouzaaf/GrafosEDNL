@@ -9,7 +9,7 @@ namespace Grafos
         private Grafo grafo;
         private List<Vertice> vertices;
         
-        public void resolver()
+        public Dictionary<Vertice, int> resolver()
         {
             //Resolvendo para a América do Sul toda
             List<(int, Vertice)> verticesComGrau = new List<(int, Vertice)>();
@@ -46,10 +46,7 @@ namespace Grafos
 
             }
 
-            foreach (KeyValuePair<Vertice, int>kvp in mapaCores)
-            {
-                Console.WriteLine($"Vértice {kvp.Key.element} - Cor: {kvp.Value}");
-            }
+            return mapaCores;
 
         }
 
@@ -131,7 +128,18 @@ namespace Grafos
 
             //Peru e suas Fronteiras
             grafo.inserirAresta(grafo.AcharIndice(Peru), grafo.AcharIndice(Chile), 0, false);
+
+            grafo.mostrarSoTabela();
+            Console.ReadKey();
             
+        }
+
+        public void imprimirSolucao(Dictionary<Vertice, int> mapaCores)
+        {
+            foreach (KeyValuePair<Vertice, int> kvp in mapaCores)
+            {
+                Console.WriteLine($"Vértice {kvp.Key.element} - Cor: {kvp.Value}");
+            }
         }
        
     }

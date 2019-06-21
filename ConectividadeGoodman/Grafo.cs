@@ -147,7 +147,7 @@ namespace Grafos
         public void mostrar()
         {
             Console.WriteLine("Tabela: ");
-            Console.WriteLine("   |");
+            Console.Write("   |");
             for (int i = 0; i < vertices.Count; i++)
                 Console.Write(" v" + vertices.ElementAt(i).element + "|");
             Console.WriteLine();
@@ -164,6 +164,25 @@ namespace Grafos
                 Console.WriteLine("|");
             }
 
+        }
+
+        public void mostrarSoTabela()
+        {
+            int rowLength = tabela.GetLength(0);
+            int colLength = tabela.GetLength(1);
+
+            for (int i = 0; i < rowLength; i++)
+            {
+                for (int j = 0; j < colLength; j++)
+                {
+                    if (tabela[i, j] == null)
+                        Console.Write(string.Format("0 "));
+                    else
+                        Console.Write(string.Format("{0} ", tabela[i, j].Count));
+                }
+                Console.Write(Environment.NewLine + Environment.NewLine);
+            }
+            Console.ReadLine();
         }
 
         public int AcharIndice(Vertice v)

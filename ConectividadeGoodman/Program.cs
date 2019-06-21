@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Grafos
 {
@@ -7,7 +8,8 @@ namespace Grafos
         static void Main(string[] args)
         {
             TorresDeRadio torre = new TorresDeRadio();
-            torre.resolver();
+            Dictionary<Vertice, int> resolvida = torre.resolver();
+            torre.imprimirSolucao(resolvida);
             Console.ReadLine();
         }
     }
